@@ -6,30 +6,36 @@
 The goal of little_cooperation is to simulate the game “little
 cooperation” to analyze the probability of winning.
 
+Inspired on
+<https://github.com/kjytay/misc/blob/master/blog/2021-01-05%20first_orchard.R>
+
 ## Game simulation
 
 ``` r
 simulate_game(verbose = TRUE) |> knitr::kable()
-#> Roll: pillar , State: 4,0,5
-#> Roll: pillar , State: 4,0,4
-#> Roll: bridge , State: 3,1,4
-#> Roll: pillar , State: 3,1,3
-#> Roll: bridge , State: 2,2,3
-#> Roll: home , State: 2,1,3
-#> Roll: home , State: 2,0,3
-#> Roll: bridge , State: 1,1,3
-#> Roll: bridge , State: 0,2,3
-#> Roll: bridge , State: 0,2,3
-#> Roll: bridge , State: 0,2,3
-#> Roll: home , State: 0,1,3
-#> Roll: home , State: 0,0,3
-#> Players win
-#> # of turns: 13
+#> Roll: bridge , State: 3,1,6
+#> Roll: bridge , State: 2,2,6
+#> Roll: pillar , State: 2,2,5
+#> Roll: pillar , State: 2,2,4
+#> Roll: home , State: 2,1,4
+#> Roll: bridge , State: 1,2,4
+#> Roll: home , State: 1,1,4
+#> Roll: pillar , State: 1,1,3
+#> Roll: pillar , State: 1,1,2
+#> Roll: bridge , State: 0,2,2
+#> Roll: bridge , State: 0,2,2
+#> Roll: bridge , State: 0,2,2
+#> Roll: bridge , State: 0,2,2
+#> Roll: home , State: 0,1,2
+#> Roll: bridge , State: 0,1,2
+#> Roll: pillar , State: 0,1,1
+#> Bridge collapses
+#> # of turns: 16
 ```
 
 | outcome | num_turns | start | bridge | home | pillars |
 |--------:|----------:|------:|-------:|-----:|--------:|
-|       1 |        13 |     0 |      0 |    4 |       3 |
+|       2 |        16 |     0 |      1 |    3 |       1 |
 
 ``` r
 
@@ -40,10 +46,10 @@ nsim <- 1000
 result <- purrr::map_dfr(1:nsim, ~ simulate_game(verbose = FALSE))
 
 cat("Probability of winning:", sum(result$outcome == 1)/nsim * 100, "%\n")
-#> Probability of winning: 36.5 %
+#> Probability of winning: 36.1 %
 
 cat("Average of turns:", mean(result$num_turns))
-#> Average of turns: 12.701
+#> Average of turns: 12.731
 ```
 
 ## Number of remaining pillars when players win

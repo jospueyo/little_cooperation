@@ -19,6 +19,8 @@ theme_set(theme_minimal())
 
 The goal of little_cooperation is to simulate the game "little cooperation" to analyze the probability of winning.
 
+Inspired on https://github.com/kjytay/misc/blob/master/blog/2021-01-05%20first_orchard.R
+
 ## Game simulation
 
 ```{r}
